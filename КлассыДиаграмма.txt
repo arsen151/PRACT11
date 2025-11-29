@@ -1,0 +1,105 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class User {
+  id: int
+  name: string
+  email: string
+  updateInfo()
+}
+
+class Student {
+  studentId: string
+  courses: List<Course>
+  registerForCourse()
+  viewGrades()
+}
+
+class Teacher {
+  position: string
+  courses: List<Course>
+  teachCourse()
+  setGrade()
+  manageSchedule()
+}
+
+class Admin {
+  role: string
+  addFaculty()
+  removeFaculty()
+  addCourse()
+  addTeacher()
+}
+
+class University {
+  name: string
+  address: string
+  faculties: List<Faculty>
+  addFaculty()
+  removeFaculty()
+}
+
+class Faculty {
+  name: string
+  departments: List<Department>
+  addDepartment()
+  removeDepartment()
+}
+
+class Department {
+  name: string
+  teachers: List<Teacher>
+  courses: List<Course>
+  addTeacher()
+  removeTeacher()
+}
+
+class Course {
+  name: string
+  students: List<Student>
+  teachers: List<Teacher>
+  schedule: List<Schedule>
+  addStudent()
+  removeStudent()
+}
+
+class Schedule {
+  date: Date
+  time: string
+  classroom: string
+  create()
+  update()
+}
+
+class Exam {
+  date: Date
+  grades: List<Grade>
+  scheduleExam()
+  setGrade()
+}
+
+class Grade {
+  value: int
+}
+
+User <|-- Student
+User <|-- Teacher
+User <|-- Admin
+
+University *-- Faculty
+Faculty *-- Department
+Department o-- Teacher
+Department o-- Course
+
+Course o-- Student
+Course o-- Teacher
+Course o-- Schedule
+
+Exam o-- Grade
+Exam --> Course
+Grade --> Student
+
+Schedule --> Course
+Schedule --> Teacher
+
+@enduml
