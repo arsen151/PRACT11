@@ -1,0 +1,40 @@
+@startuml
+skinparam componentStyle rectangle
+
+component "Frontend\n(Web + Mobile)" as FE
+component "Backend" as BE
+component "Auth Service" as AUTH
+component "Database" as DB
+component "Payment Gateway" as PAY
+component "Notification Service" as NOTIFY
+component "Analytics Module" as ANALYTICS
+component "Monitoring System" as MONITOR
+
+interface REST_API
+interface AuthAPI
+interface DB_API
+interface PaymentAPI
+interface NotifyAPI
+interface AnalyticsAPI
+
+FE --> REST_API
+REST_API --> BE
+
+BE --> AuthAPI
+BE --> DB_API
+BE --> PaymentAPI
+BE --> NotifyAPI
+BE --> AnalyticsAPI
+
+AuthAPI --> AUTH
+DB_API --> DB
+PaymentAPI --> PAY
+NotifyAPI --> NOTIFY
+AnalyticsAPI --> ANALYTICS
+
+MONITOR --> BE
+MONITOR --> DB
+MONITOR --> AUTH
+MONITOR --> PAY
+
+@enduml
